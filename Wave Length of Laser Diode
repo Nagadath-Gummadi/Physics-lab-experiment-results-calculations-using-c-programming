@@ -1,3 +1,4 @@
+/*wavelength of laser diode by plane diffraction grating*/
 #include<stdio.h>
 #include<math.h>
 #include<windows.h>
