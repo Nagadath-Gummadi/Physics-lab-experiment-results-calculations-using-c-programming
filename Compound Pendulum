@@ -1,0 +1,37 @@
+#include<stdio.h>
+int main()
+{
+    int n,osc,i;
+    float len[30],mean_t[30],time[30],lbytsq[30],l,ac,bd,sum=0,mean,acc;
+    printf("Enter no.of readings:");
+    scanf("%d",&n);
+    printf("\n");
+    printf("Enter distances of knife edge from one end of the bar:\n");
+    for(i=0;i<n;i++)
+        scanf("%f",&len[i]);
+    printf("Enter corresponding mean times:\n");
+    for(i=0;i<n;i++)
+        scanf("%f",&mean_t[i]);
+    printf("Enter no.of oscillations:");
+    scanf("%d",&osc);
+    for(i=0;i<n;i++)
+        time[i]=mean_t[i]/osc;
+    printf("s.no   Distance of knife edge  mean time  Time period\tT^2");
+    for(i=0;i<n;i++)
+        printf("\n%d\t   %f   \t\t%f   %f\t%f\n",i+1,len[i],mean_t[i],time[i],time[i]*time[i]);
+    printf("Enter AC and BD values:");
+    scanf("%f%f",&ac,&bd);
+    l=(ac+bd)/2;
+    printf("L=%f\nS.No\tL\t\tL/T^2",l);
+    for(i=0;i<n;i++)
+        lbytsq[i]=l/time[i];
+    for(i=0;i<n;i++)
+    printf("\n%d\t%f  \t%f\n",i+1,l,lbytsq[i]);
+    for(i=0;i<n;i++)
+        sum=sum+lbytsq[i];
+    mean=sum/n;
+    acc=4*3.14*3.14*mean;
+    printf("Acceleration due to gravity is %f",acc);
+
+
+}
