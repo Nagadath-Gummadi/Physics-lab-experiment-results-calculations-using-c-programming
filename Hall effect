@@ -1,0 +1,98 @@
+/*Halleffect*/
+#include<stdio.h>
+#include<math.h>
+#include<windows.h>
+void print();
+int main()
+{
+    int n,i,j,ch;
+    float m,no,k,c,p,t=0.5,a[10],i1[10],i2[10],vx[10],vh1[10],vh2[10],v[10],s1,s2;
+    printf("\t\t-----------Hall Effect--------------\n\n");
+    printf("TABLE FOR THE MEASUREMENT OF HALL VOLTAGE:\n");
+    printf("\nEnter no of readings:");
+    scanf("%d",&n);
+    read:
+    for(i=0;i<n;i++)
+    {
+        system("cls");
+        print();
+        printf("%d",i+1);
+        printf("\t");
+        scanf("%f",&i2[i]);
+        system("cls");
+        print();
+        printf("%d\t%f\t",i+1,i2[i]);
+        scanf("%f",&vh1[i]);
+        system("cls");
+        print();
+        printf("%d\t%f\t%f\t",i+1,i2[i],vh1[i]);
+        scanf("%f",&vh2[i]);
+        system("cls");
+        print();
+        printf("%d\t%f\t%f\t%f\t",i+1,i2[i],vh1[i],vh2[i]);
+        printf("\t%f",vh2[i]-vh1[i]);
+        if(vh2[i]-vh1[i]<0)
+        {
+            printf("\nIncorrect Readings\n\nEnter correct Readings");
+            system("pause");
+            goto read;
+        }
+    }
+    system("cls");
+    print();
+    for(i=0;i<n;i++)
+    {
+
+        printf("%d\t%f\t%f\t%f\t",i+1,i2[i],vh1[i],vh2[i]);
+        printf("\t%f",vh2[i]-vh1[i]);
+        printf("\n");
+    }
+    printf("\nFOR THE DETERMINATION OF RESISTIVITY:");
+    printf("\nEnter no of readings:");
+    scanf("%d",&n);
+    printf("\nEnter Ix(in mA) and corresponding Vx(in mV) values:");
+    for(i=0;i<n;i++)
+    {
+        printf("\n%d.Ix , Vx=",i+1);
+        scanf("%f%f",&i1[i],&vx[i]);
+    }
+    printf("\nIx\t\\tHall voltage");
+    printf("\n==================================");
+    for(i=0;i<n;i++)
+    printf("\n%f\t\t%f",i1[i],vx[i]);
+    printf("\nEnter slope from Ix vs Vx graph:");
+    scanf("%f",&s1);
+    printf("\nEnter slope from Ix vs Vh graph:");
+    scanf("%f",&s2);
+    printf("The standard value of thickness of sample is 0.5mm");
+    printf("\nIf you want to change the thickness enter 0");
+    printf("\notherwise enter any other key");
+    scanf("%d",&ch);
+    if(ch==0)
+    {
+        printf("Enter thickness in mm:");
+        scanf("%f",&t);
+    }
+    scanf("%d",&ch);
+    p=s1*0.001*t;
+    c=1/p;
+    k=s2*t*0.001/0.24;
+    no=1/(k*1.6);
+    m=k*c;
+    printf("\n1.Resistance=%fohm",s1);
+    printf("\n2.Resistivity=%fohm-m",p);
+    printf("\n3.Conductivity=%f 1/ohm-m",c);
+    printf("\n4.Hall coefficient=%f ohm-m^3/web",k);
+    printf("\n5.No of charged carriers=%.3f*(10^19) 1/(m^3)",no);
+    printf("\n1.Mobility of charged carriers=%f m^2/volt-sec",m);
+    return 0;
+}
+void  print()
+    {
+        printf("\t\t-----------Hall Effect--------------\n\n");
+        printf("TABLE FOR THE MEASUREMENT OF HALL VOLTAGE:\n");
+        printf("\nS.no\tApplied current\t\tHALL VOLTAGE\t\t     True Hall Voltage\n");
+        printf("\t\t\tWith M.field     Without M.field");
+        printf("\n");
+        printf("==============================================================================\n");
+    }
