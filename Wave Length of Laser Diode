@@ -1,0 +1,91 @@
+#include<stdio.h>
+#include<math.h>
+#include<windows.h>
+#include<process.h>
+void print();
+void print1();
+int main()
+{
+    int read,n[20],i;
+    float right[20],d[20],left[20],e,mean[20],xn[20],wave[20],p2[20],p1[20],sum,final_wave;
+    printf("\t\t------------Wavelength of Laser Diode------------\n\n");
+    printf("Enter no.of readings");
+    scanf("%d",&read);
+    print();
+    readings:
+    for(i=0;i<read;i++)
+    {
+        system("cls");
+        print();
+        printf("\n%d",i+1);
+        printf("\t");
+        scanf("%d",&n[i]);
+        system("cls");
+        print();
+        printf("\n%d\t%d\t",i+1,n[i]);
+        scanf("%f",&d[i]);
+        system("cls");
+        print();
+        printf("\n%d\t%d\t\t%.2f\t\t",i+1,n[i],d[i]);
+        scanf("%f",&right[i]);
+        system("cls");
+        print();
+        printf("\n%d\t%d\t\t%.2f\t\t\t%.3f\t",i+1,n[i],d[i],right[i]);
+        scanf("%f",&left[i]);
+        system("cls");
+        print();
+        printf("\n%d\t%d\t\t%.2f\t%.3f\t%.3f",i+1,n[i],d[i],right[i],left[i]);
+        printf("\t%.3f",(right[i]+left[i])/2);
+    }
+    system("cls");
+    printf("\nEnter e+d value:");
+    scanf("%f",&e);
+    system("cls");
+    print1();
+    for(i=0;i<read;i++)
+    {
+        mean[i]=(right[i]+left[i])/2;
+        if(mean[i]<0||n[i]<0||d[i]<0)
+           {
+            system("cls");
+            printf("\n\"Incorrect readings\"\n");
+            printf("Re-enter readings\n\n");
+            system("pause");
+            goto readings;
+           }
+        xn[i]=((pow(d[i],2)))+(pow(mean[i],2));
+        p2[i]=(mean[i]/sqrt(xn[i]));
+        p1[i]= e/n[i];
+        wave[i]=10000* p1[i]*p2[i];
+    }
+    for(i=0;i<read;i++)
+    {
+        printf("\n%d\t%d\t\t%.2f\t\t%.3f\t%.3f",i+1,n[i],d[i],right[i],left[i]);
+        printf("\t%.3f",(right[i]+left[i])/2);
+        printf("\t  %.3lfA^",wave[i]);
+        printf("\n");
+        sum=sum+wave[i];
+        final_wave=sum/read;
+
+    }
+    printf("\nWavelength of laser diode is %.3lf Angstroms",final_wave);
+
+
+
+}
+void print()
+{
+    printf("\t\t------------Wavelength of Laser Diode------------\n\n");
+    printf("S.no\torder of\tDistance b/w slit \tDistance b/w nth to 0th");
+    printf("\n\tgrating \t to screen\t     order maxima\n\t\t\t\t\t\tright    left\tmean");
+    printf("\n===========================================================================");
+
+}
+void print1()
+{
+    printf("\t\t------------Wavelength of Laser Diode------------\n\n");
+    printf("S.no\torder of    Distance b/w slit   Distance b/w nth to 0th    Wavelength");
+    printf("\n\tgrating \t to screen\t     order maxima\n\t\t\t\t\tright    left\tmean");
+    printf("\n===========================================================================");
+
+}
